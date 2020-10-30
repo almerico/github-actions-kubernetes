@@ -32,6 +32,7 @@ jobs:
           docker build . --file Dockerfile --tag ${{ secrets.REGISTRY_SERVER }}/alfresco/$IMAGE_NAME:$(cat VERSION)
           docker images
           docker push ${{ secrets.REGISTRY_SERVER }}/alfresco/$IMAGE_NAME:$(cat VERSION)
+          docker tag ${{ secrets.REGISTRY_SERVER }}/alfresco/$IMAGE_NAME:$(cat VERSION) ${{ secrets.REGISTRY_SERVER }}/alfresco/$IMAGE_NAME:latest
           docker push ${{ secrets.REGISTRY_SERVER }}/alfresco/$IMAGE_NAME:latest
       - name: Tag
         run: |
