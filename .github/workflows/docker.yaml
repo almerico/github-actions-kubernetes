@@ -4,7 +4,7 @@ on:
     branches:
       - master
 env:
-  IMAGE_NAME: alfresco-content-repository-docker
+  IMAGE_NAME: github-runner
   UPDATEBOT_VERSION: 1.1.53
   JX_RELEASE_VERSION: 1.0.24
 jobs:
@@ -32,18 +32,19 @@ jobs:
           docker build . --file Dockerfile --tag ${{ secrets.REGISTRY_SERVER }}/alfresco/$IMAGE_NAME:$(cat VERSION)
           docker images
           docker push ${{ secrets.REGISTRY_SERVER }}/alfresco/$IMAGE_NAME:$(cat VERSION)
+          docker push ${{ secrets.REGISTRY_SERVER }}/alfresco/$IMAGE_NAME:latest
       - name: Tag
         run: |
          ls -la 
          echo " version is $(cat VERSION)"
-         git config --global user.email "almerico@gmail.com"
-         git config --global user.name "Oleksandr Merkulov" 
+         git config --global user.email "eeoc@eeoc.com"
+         git config --global user.name "EEOC" 
          git add --all;
          git commit -m "release $(cat VERSION)" ;
          git tag -fa v$(cat VERSION) -m "Release version $(cat VERSION)";
          git show-ref
          git push origin v$(cat VERSION);
-      - name: Updatebot
-        run: updatebot push-regex -r "\s+tag:\s(.*)" -v  "$(cat VERSION)" --previous-line "\s+repository:.*/alfresco/alfresco-content-repository-docker" **/values.yaml
+#       - name: Updatebot
+#         run: updatebot push-regex -r "\s+tag:\s(.*)" -v  "$(cat VERSION)" --previous-line "\s+repository:.*/alfresco/alfresco-content-repository-docker" **/values.yaml
 
   
