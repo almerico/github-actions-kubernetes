@@ -53,6 +53,5 @@ trap 'remove; exit 143' TERM
 ls
 
  ./run.sh  &
-# sudo ./svc.sh install && sudo ./svc.sh start 
-# sudo ./svc.sh status
+
 wait $!
