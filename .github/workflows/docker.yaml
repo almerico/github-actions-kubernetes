@@ -44,8 +44,4 @@ jobs:
          git commit -m "release $(cat VERSION)" ;
          git tag -fa v$(cat VERSION) -m "Release version $(cat VERSION)";
          git show-ref
-         git push origin v$(cat VERSION);
-#       - name: Updatebot
-#         run: updatebot push-regex -r "\s+tag:\s(.*)" -v  "$(cat VERSION)" --previous-line "\s+repository:.*/alfresco/alfresco-content-repository-docker" **/values.yaml
-
-  
+         git push origin v$(cat VERSION);  
